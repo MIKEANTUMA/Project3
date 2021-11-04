@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ValueAnimator;
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
@@ -18,6 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class level1Animations extends AppCompatActivity {
 
@@ -28,6 +30,10 @@ public class level1Animations extends AppCompatActivity {
     Button drop3;
     Button drop4;
     Button drop5;
+    Button up;
+    Button down;
+    Button right;
+    Button left;
     Button play;
     ImageView ball;
     @Override
@@ -38,10 +44,14 @@ public class level1Animations extends AppCompatActivity {
         mStrtDrg=new MyStrtDrggngLstnr();
         mEndDrg=new MyEndDrgLstnr();
 
-        findViewById(R.id.btn_up).setOnLongClickListener(mStrtDrg);
-        findViewById(R.id.btn_down).setOnLongClickListener(mStrtDrg);
-        findViewById(R.id.btn_left).setOnLongClickListener(mStrtDrg);
-        findViewById(R.id.btn_right).setOnLongClickListener(mStrtDrg);
+        up = findViewById(R.id.btn_up);
+        up.setOnLongClickListener(mStrtDrg);
+        down = findViewById(R.id.btn_down);
+        down.setOnLongClickListener(mStrtDrg);
+        left = findViewById(R.id.btn_left);
+        left.setOnLongClickListener(mStrtDrg);
+        right = findViewById(R.id.btn_right);
+        right.setOnLongClickListener(mStrtDrg);
 
         drop1 = findViewById(R.id.drop_one);
         drop1.setOnDragListener(mEndDrg);
@@ -57,8 +67,17 @@ public class level1Animations extends AppCompatActivity {
 
         ball = findViewById(R.id.ball);
         play.setOnClickListener(v -> {
-            Animation iv2anim = AnimationUtils.loadAnimation(this, R.anim.level1easy_anim);
-            ball.startAnimation(iv2anim);
+            if(drop1.getBackground() == right.getBackground() && drop2.getBackground() == down.getBackground() && drop3.getBackground() == right.getBackground() && drop4.getBackground() == up.getBackground() && drop5.getBackground() == right.getBackground())
+            {
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+                Animation iv2anim = AnimationUtils.loadAnimation(this, R.anim.level1easy_anim);
+                ball.startAnimation(iv2anim);
+                startActivity(new Intent(this, Home.class));
+            }
+            else{
+                Toast.makeText(this, "Wrong, try again", Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
 

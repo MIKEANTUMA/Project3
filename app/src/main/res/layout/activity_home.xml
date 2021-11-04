@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home"
+    android:background="@drawable/home"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrow Dash"
+        android:layout_gravity="center"
+        android:textSize="60dp"
+        android:textColor="#681818"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Easy"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="50dp"
+        android:textColor="#FF0000"/>
+
+        <Button
+            android:id="@+id/easy_level_1"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Level 1"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"/>
+        <Button
+        android:id="@+id/easy_level_2"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:text="Level 2"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"/>
+        <Button
+            android:id="@+id/easy_level_3"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Level 3"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="50dp"
+            android:textColor="#FF0000"/>
+
+        <Button
+            android:id="@+id/hard_level_1"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Level 1"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"/>
+        <Button
+            android:id="@+id/hard_level_2"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Level 2"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"/>
+        <Button
+            android:id="@+id/hard_level_3"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Level 3"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+
+</LinearLayout>
