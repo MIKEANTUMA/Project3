@@ -1,5 +1,7 @@
 package com.example.project3;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ValueAnimator;
@@ -21,7 +23,13 @@ public class level1Animations extends AppCompatActivity {
 
     MyStrtDrggngLstnr mStrtDrg;
     MyEndDrgLstnr mEndDrg;
-
+    Button drop1;
+    Button drop2;
+    Button drop3;
+    Button drop4;
+    Button drop5;
+    Button play;
+    ImageView ball;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +43,26 @@ public class level1Animations extends AppCompatActivity {
         findViewById(R.id.btn_left).setOnLongClickListener(mStrtDrg);
         findViewById(R.id.btn_right).setOnLongClickListener(mStrtDrg);
 
-        findViewById(R.id.drop_one).setOnDragListener(mEndDrg);
-        findViewById(R.id.drop_two).setOnDragListener(mEndDrg);
-        findViewById(R.id.drop_three).setOnDragListener(mEndDrg);
-        findViewById(R.id.drop_four).setOnDragListener(mEndDrg);
-        findViewById(R.id.drop_five).setOnDragListener(mEndDrg);
+        drop1 = findViewById(R.id.drop_one);
+        drop1.setOnDragListener(mEndDrg);
+        drop2 = findViewById(R.id.drop_two);
+        drop2.setOnDragListener(mEndDrg);
+        drop3 = findViewById(R.id.drop_three);
+        drop3.setOnDragListener(mEndDrg);
+        drop4 = findViewById(R.id.drop_four);
+        drop4.setOnDragListener(mEndDrg);
+        drop5 = findViewById(R.id.drop_five);
+        drop5.setOnDragListener(mEndDrg);
+        play = findViewById(R.id.play);
+
+        ball = findViewById(R.id.ball);
+        play.setOnClickListener(v -> {
+            Animation iv2anim = AnimationUtils.loadAnimation(this, R.anim.level1easy_anim);
+            ball.startAnimation(iv2anim);
+        });
     }
+
+
 
     private class MyStrtDrggngLstnr implements View.OnLongClickListener{
 
