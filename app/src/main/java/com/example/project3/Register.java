@@ -66,7 +66,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
 public void RegisterUser(){
-    User userr = new User(edit_email.getText().toString().trim(), edit_password.getText().toString().trim(), userType);
+    User userr = new User(edit_email.getText().toString().trim(), edit_password.getText().toString().trim(), userType,0);
 
     mAuth.createUserWithEmailAndPassword(edit_email.getText().toString().trim(), edit_password.getText().toString().trim())
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -75,6 +75,7 @@ public void RegisterUser(){
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
+
                         FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).setValue(userr).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

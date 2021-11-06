@@ -49,11 +49,6 @@ String userType;
 
        // if(radio_parent.isChecked()) userType = "Parent";
        // if(radio_child.isChecked()) userType = "Child";
-
-
-
-
-
     }
 
 
