@@ -38,11 +38,13 @@ Button btn_hard_3;
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.easy_level_1:
-                startActivity(new Intent(this, level1Animations.class));
+                startActivity(new Intent(this, easyLevel1.class));
                 break;
             case R.id.easy_level_2:
+                startActivity(new Intent(this, easyLevel2.class));
                 break;
             case R.id.easy_level_3:
+                startActivity(new Intent(this, easylevel3.class));
                 break;
             case R.id.hard_level_1:
                 break;

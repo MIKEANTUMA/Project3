@@ -46,7 +46,7 @@ String userType;
         btn_register.setOnClickListener(this);
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
-
+        startActivity(new Intent(Login.this, Home.class));
        // if(radio_parent.isChecked()) userType = "Parent";
        // if(radio_child.isChecked()) userType = "Child";
     }

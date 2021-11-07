@@ -7,32 +7,40 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="sensor"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Project3"
-        android:screenOrientation="sensor">
+        android:theme="@style/Theme.Project3">
+
+        <activity
+            android:name=".easylevel3"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".easyLevel2"
+            android:exported="false"
+            android:screenOrientation="sensor" />
         <activity
             android:name=".Register"
             android:exported="false"
-            android:screenOrientation="sensor"/>
+            android:screenOrientation="sensor" />
         <activity
             android:name=".Login"
             android:exported="true"
             android:screenOrientation="sensor">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Home"
             android:exported="false"
-            android:screenOrientation="sensor"/>
+            android:screenOrientation="sensor" />
         <activity
-            android:name=".level1Animations"
+            android:name=".easyLevel1"
             android:exported="false"
-            android:screenOrientation="sensor"/>
-
-
+            android:screenOrientation="sensor" />
     </application>
 
 </manifest>

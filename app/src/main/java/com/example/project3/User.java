@@ -1,5 +1,7 @@
 package com.example.project3;
 
+import java.util.HashMap;
+
 public class User {
 
 
@@ -10,6 +12,19 @@ public class User {
     public User(){}
 
 
+    public User(HashMap<String,Object> user){
+        this.email = user.get("email").toString();
+        this.password = user.get("password").toString();
+        this.userType = user.get("usertype").toString();
+        this.score = Integer.parseInt(user.get("score").toString());
+    }
+
+    public User(User user){
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.score = user.getScore();
+        this.userType = user.getUserType();
+    }
 
     public User(String email, String password, String userType,int score) {
         this.email = email;
