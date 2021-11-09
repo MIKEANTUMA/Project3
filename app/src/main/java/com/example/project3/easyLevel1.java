@@ -9,6 +9,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +38,7 @@ public class easyLevel1 extends AppCompatActivity {
     Button left;
     Button play;
     ImageView ball;
-
+    MediaPlayer mediaPlayer;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class easyLevel1 extends AppCompatActivity {
         drop5.setOnDragListener(mEndDrg);
         play = findViewById(R.id.play);
 
-
+        //mediaPlayer = MediaPlayer.create(this, R.raw.click);
 
        Getuser();
        Log.d("KEY","Get user was called");
@@ -127,6 +128,7 @@ public class easyLevel1 extends AppCompatActivity {
             if(event.getAction()==DragEvent.ACTION_DROP){
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     v.setBackground(((Button) event.getLocalState()).getBackground());
+                   // mediaPlayer.start();
                 }
             }
             return true;
