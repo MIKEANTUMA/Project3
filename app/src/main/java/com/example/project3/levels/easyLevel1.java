@@ -1,8 +1,9 @@
-package com.example.project3;
+package com.example.project3.levels;
 
 
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
@@ -21,7 +22,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.project3.Home;
+import com.example.project3.R;
+import com.example.project3.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class easyLevel1 extends AppCompatActivity {
 
@@ -38,6 +49,7 @@ public class easyLevel1 extends AppCompatActivity {
     Button left;
     Button play;
     ImageView ball;
+    int s =0;
     MediaPlayer mediaPlayer;
     DatabaseReference databaseReference;
     @Override
@@ -81,6 +93,7 @@ public class easyLevel1 extends AppCompatActivity {
         play.setOnClickListener(v -> {
             if(drop1.getBackground() == right.getBackground() && drop2.getBackground() == down.getBackground() && drop3.getBackground() == right.getBackground() && drop4.getBackground() == up.getBackground() && drop5.getBackground() == right.getBackground())
             {
+
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                 Animation iv2anim = AnimationUtils.loadAnimation(this, R.anim.level1easy_anim);
                 ball.startAnimation(iv2anim);
@@ -92,6 +105,7 @@ public class easyLevel1 extends AppCompatActivity {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
+                        UpdateScore(10);
                         startActivity(new Intent(easyLevel1.this, Home.class));
                     }
 
@@ -100,6 +114,7 @@ public class easyLevel1 extends AppCompatActivity {
 
                     }
                 });
+
             }
             else{
 
@@ -146,4 +161,32 @@ public class easyLevel1 extends AppCompatActivity {
         }
 
     }
+
+    private void UpdateScore(final int score) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase firebaseDatabase;
+        // creating a variable for our
+        // Database Reference for Firebase.
+        DatabaseReference databaseReference;
+        // below line is used to get the instance
+        // of our Firebase database.
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        // below line is used to get
+        // reference for our database.
+        databaseReference = firebaseDatabase.getReference("user").child(mAuth.getCurrentUser().getUid());
+        databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    Log.d("KEY", String.valueOf(task.getResult().getValue(User.class).getScore()));
+                    int sc = task.getResult().getValue(User.class).getScore() + 10;
+                    databaseReference.child("score").setValue(sc);
+                }
+            }
+        });
+    }
+
 }

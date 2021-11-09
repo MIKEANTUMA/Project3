@@ -10,13 +10,25 @@
         android:screenOrientation="sensor"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project3">
-
         <activity
-            android:name=".easylevel3"
+            android:name=".levels.hardLevel3"
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".easyLevel2"
+            android:name=".levels.hardLevel2"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
+
+        <activity
+            android:name=".levels.hardLevel1"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".levels.easylevel3"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".levels.easyLevel2"
             android:exported="false"
             android:screenOrientation="sensor" />
         <activity
@@ -38,7 +50,7 @@
             android:exported="false"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".easyLevel1"
+            android:name=".levels.easyLevel1"
             android:exported="false"
             android:screenOrientation="sensor" />
     </application>

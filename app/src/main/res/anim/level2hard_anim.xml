@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="110"
+        android:fromYDelta="0"
+        android:toYDelta="0"
+        android:startOffset="0"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="0"
+        android:fromYDelta="0"
+        android:toYDelta="-80"
+        android:startOffset="1000"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="190"
+        android:fromYDelta="0"
+        android:toYDelta="0"
+        android:startOffset="2000"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="0"
+        android:fromYDelta="0"
+        android:toYDelta="80"
+        android:startOffset="3000"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="430"
+        android:fromYDelta="0"
+        android:toYDelta="0"
+        android:startOffset="4000"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="0"
+        android:fromYDelta="0"
+        android:toYDelta="120"
+        android:startOffset="5000"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="250"
+        android:fromYDelta="0"
+        android:toYDelta="0"
+        android:startOffset="6000"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="0"
+        android:fromYDelta="0"
+        android:toYDelta="-200"
+        android:startOffset="7000"
+        android:duration="1000" />
+    <translate
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="0"
+        android:toXDelta="1000"
+        android:fromYDelta="0"
+        android:toYDelta="0"
+        android:startOffset="8000"
+        android:duration="1000" />
+</set>

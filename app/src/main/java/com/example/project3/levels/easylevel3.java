@@ -1,7 +1,8 @@
-package com.example.project3;
+package com.example.project3.levels;
 
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
@@ -19,7 +20,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.project3.Home;
+import com.example.project3.R;
+import com.example.project3.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class easylevel3 extends AppCompatActivity {
 
@@ -37,7 +48,7 @@ public class easylevel3 extends AppCompatActivity {
     Button play;
     ImageView ball;
     DatabaseReference databaseReference;
-
+    int s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +95,7 @@ public class easylevel3 extends AppCompatActivity {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
+                        UpdateScore(10);
                         startActivity(new Intent(easylevel3.this, Home.class));
                     }
 
@@ -132,6 +144,34 @@ public class easylevel3 extends AppCompatActivity {
             super.onProvideShadowMetrics(outShadowSize, outShadowTouchPoint);
         }
 
+    }
+
+
+    private void UpdateScore(final int score) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase firebaseDatabase;
+        // creating a variable for our
+        // Database Reference for Firebase.
+        DatabaseReference databaseReference;
+        // below line is used to get the instance
+        // of our Firebase database.
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        // below line is used to get
+        // reference for our database.
+        databaseReference = firebaseDatabase.getReference("user").child(mAuth.getCurrentUser().getUid());
+        databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    Log.d("KEY", String.valueOf(task.getResult().getValue(User.class).getScore()));
+                    int sc = task.getResult().getValue(User.class).getScore() + 10;
+                    databaseReference.child("score").setValue(sc);
+                }
+            }
+        });
     }
 }
 

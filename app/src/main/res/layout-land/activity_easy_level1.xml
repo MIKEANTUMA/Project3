@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/easylevel1"
-    tools:context=".easyLevel1">
+    tools:context=".levels.easyLevel1">
 
 
     <Button
