@@ -1,6 +1,7 @@
 package com.example.project3;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,37 +26,51 @@ public class myGlobals {
     public void setUser(HashMap<String, Object> user) {
         this.user = user;
     }
+    // creating a variable for
+    // our Firebase Database.
 
-    public static void Getuser() {
-        HashMap<String,Object> user;
-        user = new HashMap<>();
 
-        FirebaseAuth mAuth;
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser userr = mAuth.getCurrentUser();
-        DatabaseReference familyListReference = FirebaseDatabase.getInstance().getReference().child(userr.getUid());
-        familyListReference.addValueEventListener(new ValueEventListener() {
+    public User u;
+
+
+
+    private void getdata() {
+        FirebaseDatabase firebaseDatabase;
+
+        // creating a variable for our
+        // Database Reference for Firebase.
+        DatabaseReference databaseReference;
+        // below line is used to get the instance
+        // of our Firebase database.
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        // below line is used to get
+        // reference for our database.
+        databaseReference = firebaseDatabase.getReference("user");
+        // calling add value event listener method
+        // for getting the values from database.
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Log.d("KEY", dataSnapshot.toString());
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    //Log.d("KEY", ds.toString());
-                    String key = (String) ds.getKey();
-                    user.put(ds.getKey(),ds.getValue().toString());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // this method is call to get the realtime
+                // updates in the data.
+                // this method is called when the data is
+                // changed in our Firebase console.
+                // below line is for getting the data from
+                // snapshot of our database.
+                String value = snapshot.getValue(String.class);
 
-                    DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child(userr.getUid()).child(key);
-                }
-                Log.d("USERRRRR", user.toString());
+                Log.d("KEY", value);
 
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //Log.d("KEY", "Read failed");
+            public void onCancelled(@NonNull DatabaseError error) {
+                // calling on cancelled method when we receive
+                // any error or we are not able to get the data.
+                Log.d("KEY","Fail to get data.");
             }
         });
-
-        //return user;
     }
 
 

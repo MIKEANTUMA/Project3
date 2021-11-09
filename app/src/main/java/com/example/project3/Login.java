@@ -17,8 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
@@ -31,6 +36,7 @@ RadioButton radio_child;
 Button btn_login;
 Button btn_register;
 String userType;
+HashMap<String,Object> user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +52,7 @@ String userType;
         btn_register.setOnClickListener(this);
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
-        startActivity(new Intent(Login.this, Home.class));
+        //startActivity(new Intent(Login.this, Home.class));
        // if(radio_parent.isChecked()) userType = "Parent";
        // if(radio_child.isChecked()) userType = "Child";
     }
@@ -73,7 +79,10 @@ String userType;
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(Login.this, "Authentication Successes.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(Login.this, Home.class));
+                            getdata();
+                            Log.d("KEY","get data was called");
+
+                           // startActivity(new Intent(Login.this, Home.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -81,5 +90,48 @@ String userType;
                         }
                     }
                 });
+        //Log.d("LETS HOPE THIS WORKS", user.toString());
+    }
+
+    private void getdata() {
+        FirebaseDatabase firebaseDatabase;
+        // creating a variable for our
+        // Database Reference for Firebase.
+        DatabaseReference databaseReference;
+        // below line is used to get the instance
+        // of our Firebase database.
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        // below line is used to get
+        // reference for our database.
+        databaseReference = firebaseDatabase.getReference("user").child(mAuth.getCurrentUser().getUid());
+        // calling add value event listener method
+        // for getting the values from database.
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // this method is call to get the realtime
+                // updates in the data.
+                // this method is called when the data is
+                // changed in our Firebase console.
+                // below line is for getting the data from
+                // snapshot of our database.
+                 user = (HashMap<String, Object>) snapshot.getValue();
+
+                Log.d("KEY", user.toString());
+                Intent intent = new Intent(Login.this, Home.class);
+                intent.putExtra("USER", user);
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // calling on cancelled method when we receive
+                // any error or we are not able to get the data.
+                Log.d("KEY","Fail to get data.");
+            }
+        });
+
     }
 }
