@@ -1,7 +1,7 @@
 package com.example.project3;
 
 
-import static com.example.project3.myGlobals.Getuser;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,7 +73,7 @@ public class easyLevel1 extends AppCompatActivity {
 
         //mediaPlayer = MediaPlayer.create(this, R.raw.click);
 
-       Getuser();
+
        Log.d("KEY","Get user was called");
        // Log.d("USERAAAAAAAAA",user.toString());
 

@@ -1,6 +1,6 @@
 package com.example.project3;
 
-import static com.example.project3.myGlobals.Getuser;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -66,7 +66,7 @@ public class easylevel3 extends AppCompatActivity {
         drop5.setOnDragListener(mEndDrg);
         play = findViewById(R.id.play);
 
-        Getuser();
+
         Log.d("KEY", "Get user was called");
         // Log.d("USERAAAAAAAAA",user.toString());
 

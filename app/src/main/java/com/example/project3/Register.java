@@ -76,7 +76,7 @@ public void RegisterUser(){
                         // Sign in success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
 
-                        FirebaseDatabase.getInstance().getReference().child(user.getUid()).setValue(userr).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).setValue(userr).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){

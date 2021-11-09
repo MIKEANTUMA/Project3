@@ -7,13 +7,17 @@
     tools:context=".Home"
     android:background="@drawable/home"
     android:orientation="vertical">
-
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Arrow Dash"
         android:layout_gravity="center"
-        android:textSize="60dp"
+        android:textSize="40dp"
         android:textColor="#681818"/>
     <LinearLayout
         android:layout_width="wrap_content"
