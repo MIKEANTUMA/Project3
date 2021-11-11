@@ -9,6 +9,8 @@ public class User {
     private String password;
     private String userType;
     private int score;
+    private HashMap<String, Integer> attempt;
+
     public User(){}
 
 
@@ -17,6 +19,7 @@ public class User {
         this.password = user.get("password").toString();
         this.userType = user.get("usertype").toString();
         this.score = Integer.parseInt(user.get("score").toString());
+        this.attempt = (HashMap<String, Integer>) user.get("attempt");
     }
 
     public User(User user){
@@ -24,13 +27,15 @@ public class User {
         this.password = user.getPassword();
         this.score = user.getScore();
         this.userType = user.getUserType();
+        this.attempt = user.getAttempt();
     }
 
-    public User(String email, String password, String userType,int score) {
+    public User(String email, String password, String userType,int score, HashMap<String, Integer> attempt) {
         this.email = email;
         this.password = password;
         this.userType = userType;
         this.score = score;
+        this.attempt = attempt;
     }
     public int getScore() {
         return score;
@@ -61,5 +66,16 @@ public class User {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public Integer getAttempt(String key) {
+        return attempt.get(key);
+    }
+    public HashMap getAttempt() {
+        return attempt;
+    }
+
+    public void setAttempt(HashMap<String, Integer> attempt) {
+        this.attempt = attempt;
     }
 }

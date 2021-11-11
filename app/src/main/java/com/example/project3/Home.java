@@ -33,6 +33,7 @@ Button btn_easy_3;
 Button btn_hard_1;
 Button btn_hard_2;
 Button btn_hard_3;
+
 Button logout;
 TextView welcomeText;
 TextView scoreText;
@@ -67,16 +68,14 @@ private FirebaseAuth mAuth;
 
 
     }
-
     @Override
     protected void onStart() {
         super.onStart();
         getdata();
     }
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.easy_level_1:
                 getdata();
                 startActivity(new Intent(this, easyLevel1.class));
@@ -100,7 +99,7 @@ private FirebaseAuth mAuth;
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, Login.class));
-
+                break;
         }
     }
 
@@ -113,7 +112,6 @@ private FirebaseAuth mAuth;
         // below line is used to get the instance
         // of our Firebase database.
         firebaseDatabase = FirebaseDatabase.getInstance();
-
         // below line is used to get
         // reference for our database.
         databaseReference = firebaseDatabase.getReference("user").child(mAuth.getCurrentUser().getUid());
@@ -130,10 +128,7 @@ private FirebaseAuth mAuth;
                 // snapshot of our database.
                 welcomeText.setText("Welcome, "+ snapshot.getValue(User.class).getEmail());
                 scoreText.setText("Score: "+snapshot.getValue(User.class).getScore());
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
@@ -141,8 +136,5 @@ private FirebaseAuth mAuth;
                 Log.d("KEY","Fail to get data.");
             }
         });
-
     }
-
-
 }

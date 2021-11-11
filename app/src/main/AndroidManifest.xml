@@ -11,18 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project3">
         <activity
-            android:name=".levels.hardLevel3"
+            android:name=".ParentPortal"
             android:exported="false"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".levels.hardLevel3"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".levels.hardLevel2"
             android:exported="false"
-            android:screenOrientation="landscape"/>
-
+            android:screenOrientation="landscape" />
         <activity
             android:name=".levels.hardLevel1"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".levels.easylevel3"
             android:exported="false"

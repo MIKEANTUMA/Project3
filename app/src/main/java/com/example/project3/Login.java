@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -35,40 +36,51 @@ RadioButton radio_parent;
 RadioButton radio_child;
 Button btn_login;
 Button btn_register;
-String userType;
+String userType ="n";
+String s;
 HashMap<String,Object> user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         mAuth = FirebaseAuth.getInstance();
-
-
         edit_email = findViewById(R.id.et_login_email);
         edit_password = findViewById(R.id.et_login_password);
-        radio_parent = findViewById(R.id.Rbtn_login_parent);
         btn_register = findViewById(R.id.btn_login_register);
         btn_register.setOnClickListener(this);
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
-        //startActivity(new Intent(Login.this, Home.class));
-       // if(radio_parent.isChecked()) userType = "Parent";
-       // if(radio_child.isChecked()) userType = "Child";
-        //startActivity(new Intent(Login.this, Home.class));
+        radio_parent = findViewById(R.id.Rbtn_login_parent);
+        radio_child = findViewById(R.id.Rbtn_login_child);
+        radio_parent.setOnClickListener(this);
+        radio_child.setOnClickListener(this);
+       // Log.d("KEY", userType);
 
     }
 
-
     @Override
     public void onClick(View v) {
+
         switch (v.getId()){
             case R.id.btn_login_register:
                 startActivity(new Intent(this, Register.class));
                 break;
             case R.id.btn_login:
-                Login();
+                if(userType == "n"){
+                    Toast.makeText(this, "Please specify if parent or child", Toast.LENGTH_SHORT).show();
+                }else {
+                        Login();
+                    }
                 break;
+            case R.id.Rbtn_login_parent:
+
+                    userType = "Parent";
+                    Log.d("KEY", userType);
+                    break;
+            case R.id.Rbtn_login_child:
+                    userType = "Child";
+                     Log.d("KEY", userType);
+                    break;
         }
     }
 
@@ -81,14 +93,23 @@ HashMap<String,Object> user;
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(Login.this, "Authentication Successes.", Toast.LENGTH_SHORT).show();
-                            //getdata();
+
                             Log.d("KEY","get data was called");
 
-                            startActivity(new Intent(Login.this, Home.class));
+                            if(userType == "Child")
+                            {
+                                startActivity(new Intent(Login.this, Home.class));
+                            }
+
+                            if(userType == "Parent")
+                            {
+                                startActivity(new Intent(Login.this, ParentPortal.class));
+                            }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-
+                            Log.e("ERROR", task.getException().toString());
                         }
                     }
                 });

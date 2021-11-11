@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class Register extends AppCompatActivity implements View.OnClickListener {
     EditText edit_email;
     EditText edit_password;
@@ -66,7 +68,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
 public void RegisterUser(){
-    User userr = new User(edit_email.getText().toString().trim(), edit_password.getText().toString().trim(), userType,0);
+    HashMap<String, Integer> attempt = new HashMap<>();
+    attempt.put("easyLevel1",0);
+    attempt.put("easyLevel2",0);
+    attempt.put("easyLevel3",0);
+    attempt.put("hardLevel1",0);
+    attempt.put("hardLevel2",0);
+    attempt.put("hardLevel3",0);
+    User userr = new User(edit_email.getText().toString().trim(), edit_password.getText().toString().trim(), userType,0, attempt);
 
     mAuth.createUserWithEmailAndPassword(edit_email.getText().toString().trim(), edit_password.getText().toString().trim())
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -88,9 +97,9 @@ public void RegisterUser(){
                         Toast.makeText(Register.this, "Authentication Successes.", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Register.this, Login.class));
                     } else {
-                        String tag ="";
+
                         // If sign in fails, display a message to the user.
-                        Log.d(tag, String.valueOf(task.getException()));
+                        Log.e("ERROR", String.valueOf(task.getException()));
                         Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
 
                     }

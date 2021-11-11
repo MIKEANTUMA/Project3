@@ -34,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class easyLevel2 extends AppCompatActivity {
-
+    final String name = "easyLevel2";
     MyStrtDrggngLstnr mStrtDrg;
     MyEndDrgLstnr mEndDrg;
     Button drop1;
@@ -97,6 +97,7 @@ public class easyLevel2 extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         UpdateScore(10);
+                        UpdateAttempt();
                         startActivity(new Intent(easyLevel2.this, Home.class));
                     }
 
@@ -107,7 +108,7 @@ public class easyLevel2 extends AppCompatActivity {
                 });
             }
             else{
-
+                UpdateAttempt();
                 Toast.makeText(this, "Wrong, try again", Toast.LENGTH_SHORT).show();
             }
 
@@ -149,6 +150,33 @@ public class easyLevel2 extends AppCompatActivity {
             super.onProvideShadowMetrics(outShadowSize, outShadowTouchPoint);
         }
 
+    }
+
+    private void UpdateAttempt(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase firebaseDatabase;
+        // creating a variable for our
+        // Database Reference for Firebase.
+        DatabaseReference databaseReference;
+        // below line is used to get the instance
+        // of our Firebase database.
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        // below line is used to get
+        // reference for our database.
+        databaseReference = firebaseDatabase.getReference("user").child(mAuth.getCurrentUser().getUid());
+        databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    Log.d("KEY", String.valueOf(task.getResult().getValue(User.class).getScore()));
+                    Integer at = task.getResult().getValue(User.class).getAttempt(name) + 1;
+                    databaseReference.child("attempt").child(name).setValue(at);
+                }
+            }
+        });
     }
 
     private void UpdateScore(final int score) {
