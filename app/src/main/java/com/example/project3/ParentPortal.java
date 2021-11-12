@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -36,6 +37,8 @@ public class ParentPortal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_portal);
+        MediaPlayer music = MediaPlayer.create(this, R.raw.music);
+        music.start();
         childemail = findViewById(R.id.child_email);
         findViewById(R.id.childemailsubmit).setOnClickListener(v -> {
             Log.d("KEY","get child attempts was called");

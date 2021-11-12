@@ -1,9 +1,9 @@
 package com.example.project3;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-
 public class Home extends AppCompatActivity implements View.OnClickListener {
 Button btn_easy_1;
 Button btn_easy_2;
@@ -34,6 +33,7 @@ Button btn_hard_1;
 Button btn_hard_2;
 Button btn_hard_3;
 
+MediaPlayer music;
 Button logout;
 TextView welcomeText;
 TextView scoreText;
@@ -52,12 +52,14 @@ private FirebaseAuth mAuth;
         btn_hard_1 = findViewById(R.id.hard_level_1);
         btn_hard_2 = findViewById(R.id.hard_level_2);
         btn_hard_3 = findViewById(R.id.hard_level_3);
+
         btn_easy_1.setOnClickListener(this);
         btn_easy_2.setOnClickListener(this);
         btn_easy_3.setOnClickListener(this);
         btn_hard_1.setOnClickListener(this);
         btn_hard_2.setOnClickListener(this);
         btn_hard_3.setOnClickListener(this);
+
         logout = findViewById(R.id.btn_logout);
         logout.setOnClickListener(this);
         new Thread(new Runnable() {
@@ -65,13 +67,14 @@ private FirebaseAuth mAuth;
                 getdata();
             }
         }).start();
-
-
+        music = MediaPlayer.create(this, R.raw.music);
     }
     @Override
     protected void onStart() {
         super.onStart();
         getdata();
+        music.start();
+        music.setLooping(true);
     }
     @Override
     public void onClick(View v) {
@@ -100,6 +103,7 @@ private FirebaseAuth mAuth;
                 Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, Login.class));
                 break;
+
         }
     }
 

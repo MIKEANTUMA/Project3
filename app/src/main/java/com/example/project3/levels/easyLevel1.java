@@ -63,7 +63,6 @@ public class easyLevel1 extends AppCompatActivity {
         setContentView(R.layout.activity_easy_level1);
 
 
-
         mStrtDrg=new MyStrtDrggngLstnr();
         mEndDrg=new MyEndDrgLstnr();
 
@@ -96,6 +95,7 @@ public class easyLevel1 extends AppCompatActivity {
 
         ball = findViewById(R.id.ball);
         play.setOnClickListener(v -> {
+            //checking if the right arrows were chosen
             if(drop1.getBackground() == right.getBackground() && drop2.getBackground() == down.getBackground() && drop3.getBackground() == right.getBackground() && drop4.getBackground() == up.getBackground() && drop5.getBackground() == right.getBackground())
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -170,7 +170,7 @@ public class easyLevel1 extends AppCompatActivity {
         }
 
     }
-
+//updates number of attempts to complete level
     private void UpdateAttempt(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase;
@@ -197,8 +197,7 @@ public class easyLevel1 extends AppCompatActivity {
             }
         });
     }
-
-
+//updates user score
     private void UpdateScore(final int score) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase;
@@ -225,15 +224,4 @@ public class easyLevel1 extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
 }
