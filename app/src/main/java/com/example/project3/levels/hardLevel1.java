@@ -3,6 +3,7 @@ package com.example.project3.levels;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -103,6 +104,8 @@ public class hardLevel1 extends AppCompatActivity {
                     && drop7.getBackground() == right.getBackground()
                     && drop8.getBackground() == up.getBackground()
                     && drop9.getBackground() == right.getBackground()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Correct!").create().show();
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                 Animation iv2anim = AnimationUtils.loadAnimation(this, R.anim.level1hard_anim);
                 ball.startAnimation(iv2anim);
@@ -125,6 +128,8 @@ public class hardLevel1 extends AppCompatActivity {
                     }
                 });
             } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Wrong, try again").create().show();
                 UpdateAttempt();
                 Toast.makeText(this, "Wrong, try again", Toast.LENGTH_SHORT).show();
             }

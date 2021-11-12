@@ -5,6 +5,7 @@ package com.example.project3.levels;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -84,7 +85,9 @@ public class easylevel3 extends AppCompatActivity {
         ball = findViewById(R.id.ball);
         play.setOnClickListener(v -> {
            if (drop1.getBackground() == right.getBackground() && drop2.getBackground() == up.getBackground() && drop3.getBackground() == right.getBackground() && drop4.getBackground() == down.getBackground()&&drop5.getBackground() == right.getBackground()) {
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+               AlertDialog.Builder builder = new AlertDialog.Builder(this);
+               builder.setMessage("Correct!").create().show();
+               Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                 Animation iv2anim = AnimationUtils.loadAnimation(this, R.anim.level3easy_anim);
                 ball.startAnimation(iv2anim);
                 iv2anim.setAnimationListener(new Animation.AnimationListener() {
@@ -106,6 +109,8 @@ public class easylevel3 extends AppCompatActivity {
                     }
                 });
             } else {
+               AlertDialog.Builder builder = new AlertDialog.Builder(this);
+               builder.setMessage("Wrong, try again").create().show();
                UpdateAttempt();
                 Toast.makeText(this, "Wrong, try again", Toast.LENGTH_SHORT).show();
             }

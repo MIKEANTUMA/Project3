@@ -6,6 +6,7 @@ package com.example.project3.levels;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -34,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class easyLevel1 extends AppCompatActivity {
@@ -96,7 +98,8 @@ public class easyLevel1 extends AppCompatActivity {
         play.setOnClickListener(v -> {
             if(drop1.getBackground() == right.getBackground() && drop2.getBackground() == down.getBackground() && drop3.getBackground() == right.getBackground() && drop4.getBackground() == up.getBackground() && drop5.getBackground() == right.getBackground())
             {
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Correct!").create().show();
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                 Animation iv2anim = AnimationUtils.loadAnimation(this, R.anim.level1easy_anim);
                 ball.startAnimation(iv2anim);
@@ -121,6 +124,8 @@ public class easyLevel1 extends AppCompatActivity {
 
             }
             else{
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Wrong, try again").create().show();
                 UpdateAttempt();
                 Toast.makeText(this, "Wrong, try again", Toast.LENGTH_SHORT).show();
             }
@@ -220,5 +225,15 @@ public class easyLevel1 extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
+
+
+
+
+
 
 }
